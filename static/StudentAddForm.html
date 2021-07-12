@@ -1,0 +1,73 @@
+<!Doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'/>
+    <title> Student Add Form </title>
+    <script>
+      function validateForm(frm)
+      {
+        var rollNumber=frm.rollNumber.value.trim();
+        if(rollNumber.length==0)
+        {
+          alert("Roll Number Required");
+          frm.rollNumber.focus();
+          return false;
+        }
+        rollNumber=parseInt(rollNumber);
+        if(isNaN(rollNumber))
+        {
+          alert("Roll Number should be an integer value");
+          frm.rollNumber.value='';
+          frm.rollNumber.focus();
+          return false;
+        }
+        if(rollNumber<=0)
+        {
+          alert("Roll Number should be greater than zero");
+          frm.rollNumber.value='';
+          frm.rollNumber.focus();
+          return false;
+        }
+        var name=frm.name.value.trim();
+        if(name.length==0)
+        {
+          alert("Name required");
+          frm.name.focus();
+          return false;
+        }
+        var v='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz .';
+        var i=0;
+        while(i<name.length)
+        {
+          if(v.indexOf(name.charAt(i))==-1)
+          {
+            frm.name.focus();
+            return false;
+          }
+          i++;
+        }
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Student (Add Module)</h1>
+    <form action='addStudent' onsubmit='return validateForm(this)'>
+      Roll Number :
+      <input type='text' id='rollNumber' name='rollNumber'>
+      <br/>
+      Name :
+      <input type='text' id='name' name='name' maxlength='20'>
+      <br/>
+      Gender &nbsp;&nbsp;
+      Male : <input type='radio' id='male' name='gender' value='M' checked>
+      &nbsp;&nbsp;&nbsp;
+      Female : <input type='radio' id='female' name='gender' value='F'>
+      <br/>
+      <br/>
+      <button type='submit'>Add</button>
+    </form>
+    <br/>
+    <a href='/'>Home</a>
+  </body>
+</html>
